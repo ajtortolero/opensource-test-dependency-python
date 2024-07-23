@@ -1,5 +1,8 @@
 name: List Dependencies with Licenses
 
+on:
+  workflow_dispatch:
+  
 # on:
 #   pull_request:
 #     branches:
