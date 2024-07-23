@@ -1,9 +1,9 @@
 name: List Dependencies with Licenses
 
-on:
-  pull_request:
-    branches:
-      - trunk
+# on:
+#   pull_request:
+#     branches:
+#       - trunk
 
 jobs:
   list-dependencies:
@@ -20,14 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv venv
-          .venv/bin/activate
           pip install -r requirements.txt
           pip install pip-licenses
 
       - name: List dependencies with licenses
         run: |
-          .venv/bin/activate
           pip-licenses --format=json > dependencies-with-licenses.json
 
       - name: Upload dependencies list
