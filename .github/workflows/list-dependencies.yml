@@ -40,6 +40,10 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Upgrade setuptools and wheel
+        run: |
+          pip install --upgrade setuptools wheel
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
