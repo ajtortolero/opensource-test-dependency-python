@@ -73,6 +73,7 @@ jobs:
       - name: List dependencies with licenses
         run: |
           . venv/bin/activate
+          pip install -r requirements.txt --no-cache-dir
           pip-licenses --format=json > dependencies-with-licenses.json || true      
 
       # - name: Create license report script
