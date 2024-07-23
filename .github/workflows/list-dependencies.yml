@@ -27,7 +27,8 @@ jobs:
             libjpeg-dev \
             libblas-dev \
             liblapack-dev \
-            gfortran
+            gfortran \
+            python3-distutils
 
       - name: Checkout repository
         uses: actions/checkout@v2
