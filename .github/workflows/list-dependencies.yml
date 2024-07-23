@@ -26,15 +26,16 @@ jobs:
         with:
           python-version: '3.x'
 
-      # - name: Install dependencies
-      #   run: |
-      #     pip install --upgrade pip
-      #     pip install -r requirements.txt
-      #     pip install pip-licenses
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pip-licenses
+          pip install requests
 
-      # - name: List dependencies with licenses
-      #   run: |
-      #     pip-licenses --format=json > dependencies-with-licenses.json
+      - name: Create license report
+        run: |
+          pip-licenses --format=json > dependencies-pip-licenses.json
 
       - name: Create license report script
         run: |
@@ -49,19 +50,21 @@ jobs:
           echo "            data = response.json()" >> licenseReport.py
           echo "            info = data.get('info', {})" >> licenseReport.py
           echo "            licenses[package] = info.get('license', 'No license found')" >> licenseReport.py
-          echo "with open('dependencies-with-licenses.json', 'w') as f:" >> licenseReport.py
+          echo "with open('dependencies-request-licenses.json', 'w') as f:" >> licenseReport.py
           echo "    json.dump(licenses, f, indent=2)" >> licenseReport.py      
 
-      - name: Install requests
-        run: pip install requests
 
       - name: Run license report script
         run: python licenseReport.py
 
-      - name: Print dependencies with licenses
+      - name: Print Request licenses
         run: |
-          cat dependencies-with-licenses.json
+          cat dependencies-request-licenses.json | grep GPL
           
+      - name: Print PIP licenses
+        run: |
+          cat dependencies-request-licenses.json | grep GPL
+
       - name: Upload dependencies list
         uses: actions/upload-artifact@v2
         with:
