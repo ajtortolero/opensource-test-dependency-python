@@ -59,11 +59,11 @@ jobs:
 
       - name: Print PIP licenses
         run: |
-          cat dependencies-request-licenses.json | grep GPL
+          cat dependencies-request-licenses.json
           
       - name: Print Request licenses
         run: |
-          cat dependencies-pip-licenses.json | grep GPL
+          cat dependencies-pip-licenses.json
 
       - name: Upload dependencies list
         uses: actions/upload-artifact@v2
