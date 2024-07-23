@@ -50,7 +50,7 @@ jobs:
         run: pip install requests
 
       - name: Run license report script
-        run: python license_report.py
+        run: python licenseReport.py
 
       - name: Print dependencies with licenses
         run: |
