@@ -64,16 +64,16 @@ jobs:
       #   run: |
       #     pip-licenses --format=json > dependencies-with-licenses.json
 
-    - name: Install pip-licenses
-      run: |
-        python -m venv venv
-        . venv/bin/activate
-        pip install pip-licenses
+      - name: Install pip-licenses
+        run: |
+          python -m venv venv
+          . venv/bin/activate
+          pip install pip-licenses
 
-    - name: List dependencies with licenses
-      run: |
-        . venv/bin/activate
-        pip-licenses --format=json > dependencies-with-licenses.json || true      
+      - name: List dependencies with licenses
+        run: |
+          . venv/bin/activate
+          pip-licenses --format=json > dependencies-with-licenses.json || true      
 
       # - name: Create license report script
       #   run: |
