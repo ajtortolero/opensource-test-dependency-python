@@ -28,7 +28,8 @@ jobs:
             libblas-dev \
             liblapack-dev \
             gfortran \
-            python3-distutils
+            python3-distutils \
+            python3-venv
 
       - name: Checkout repository
         uses: actions/checkout@v2
