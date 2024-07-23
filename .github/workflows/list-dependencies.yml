@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            libssl-dev \
-            libffi-dev \
-            python3-dev \
-            libxml2-dev \
-            libxslt1-dev \
-            zlib1g-dev \
-            libjpeg-dev \
-            libblas-dev \
-            liblapack-dev \
-            gfortran \
-            python3-distutils \
-            python3-pip \
-            python3-venv
+      # - name: Install system dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y \
+      #       build-essential \
+      #       libssl-dev \
+      #       libffi-dev \
+      #       python3-dev \
+      #       libxml2-dev \
+      #       libxslt1-dev \
+      #       zlib1g-dev \
+      #       libjpeg-dev \
+      #       libblas-dev \
+      #       liblapack-dev \
+      #       gfortran \
+      #       python3-distutils \
+      #       python3-pip \
+      #       python3-venv
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -49,10 +49,10 @@ jobs:
         run: |
           pip install --upgrade pip setuptools wheel
 
-      - name: Reinstall setuptools
+      - name: Install system dependencies
         run: |
-          pip uninstall -y setuptools
-          pip install setuptools
+          sudo apt-get update
+          sudo apt-get install -y build-essential
 
       - name: Install dependencies
         run: |
