@@ -1,0 +1,37 @@
+name: List Dependencies with Licenses
+
+on:
+  pull_request:
+    branches:
+      - trunk
+
+jobs:
+  list-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          .venv/bin/activate
+          pip install -r requirements.txt
+          pip install pip-licenses
+
+      - name: List dependencies with licenses
+        run: |
+          .venv/bin/activate
+          pip-licenses --format=json > dependencies-with-licenses.json
+
+      - name: Upload dependencies list
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependencies
+          path: dependencies-with-licenses.json
