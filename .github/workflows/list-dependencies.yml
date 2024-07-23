@@ -13,6 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            libssl-dev \
+            libffi-dev \
+            python3-dev \
+            libxml2-dev \
+            libxslt1-dev \
+            zlib1g-dev \
+            libjpeg-dev \
+            libblas-dev \
+            liblapack-dev \
+            gfortran
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -21,36 +37,35 @@ jobs:
         with:
           python-version: '3.x'
 
-      # - name: Install dependencies
-      #   run: |
-      #     pip install -r requirements.txt
-      #     pip install pip-licenses
-
-      # - name: List dependencies with licenses
-      #   run: |
-      #     pip-licenses --format=json > dependencies-with-licenses.json
-
-      - name: Create license report script
+      - name: Install dependencies
         run: |
-          echo "import json" > licenseReport.py
-          echo "import requests" >> licenseReport.py
-          echo "licenses = {}" >> licenseReport.py
-          echo "with open('requirements.txt', 'r') as f:" >> licenseReport.py
-          echo "    for line in f:" >> licenseReport.py
-          echo "        package = line.strip().split('==')[0]" >> licenseReport.py
-          echo "        response = requests.get(f'https://pypi.org/pypi/{package}/json')" >> licenseReport.py
-          echo "        if response.status_code == 200:" >> licenseReport.py
-          echo "            data = response.json()" >> licenseReport.py
-          echo "            info = data.get('info', {})" >> licenseReport.py
-          echo "            licenses[package] = info.get('license', 'No license found')" >> licenseReport.py
-          echo "with open('dependencies-with-licenses.json', 'w') as f:" >> licenseReport.py
-          echo "    json.dump(licenses, f, indent=2)" >> licenseReport.py      
+          pip install pip-licenses
 
-      - name: Install requests
-        run: pip install requests
+      - name: List dependencies with licenses
+        run: |
+          pip-licenses --format=json > dependencies-with-licenses.json
 
-      - name: Run license report script
-        run: python licenseReport.py
+      # - name: Create license report script
+      #   run: |
+      #     echo "import json" > licenseReport.py
+      #     echo "import requests" >> licenseReport.py
+      #     echo "licenses = {}" >> licenseReport.py
+      #     echo "with open('requirements.txt', 'r') as f:" >> licenseReport.py
+      #     echo "    for line in f:" >> licenseReport.py
+      #     echo "        package = line.strip().split('==')[0]" >> licenseReport.py
+      #     echo "        response = requests.get(f'https://pypi.org/pypi/{package}/json')" >> licenseReport.py
+      #     echo "        if response.status_code == 200:" >> licenseReport.py
+      #     echo "            data = response.json()" >> licenseReport.py
+      #     echo "            info = data.get('info', {})" >> licenseReport.py
+      #     echo "            licenses[package] = info.get('license', 'No license found')" >> licenseReport.py
+      #     echo "with open('dependencies-with-licenses.json', 'w') as f:" >> licenseReport.py
+      #     echo "    json.dump(licenses, f, indent=2)" >> licenseReport.py      
+
+      # - name: Install requests
+      #   run: pip install requests
+
+      # - name: Run license report script
+      #   run: python licenseReport.py
 
       - name: Print dependencies with licenses
         run: |
