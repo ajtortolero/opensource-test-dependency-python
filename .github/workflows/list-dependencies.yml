@@ -57,13 +57,13 @@ jobs:
       - name: Run license report script
         run: python licenseReport.py
 
-      - name: Print Request licenses
-        run: |
-          cat dependencies-request-licenses.json | grep GPL
-          
       - name: Print PIP licenses
         run: |
           cat dependencies-request-licenses.json | grep GPL
+          
+      - name: Print Request licenses
+        run: |
+          cat dependencies-pip-licenses.json | grep GPL
 
       - name: Upload dependencies list
         uses: actions/upload-artifact@v2
