@@ -40,13 +40,22 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Upgrade setuptools and wheel
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Upgrade pip, setuptools, and wheel
         run: |
-          pip install --upgrade setuptools wheel
+          pip install --upgrade pip setuptools wheel
+
+      - name: Reinstall setuptools
+        run: |
+          pip uninstall -y setuptools
+          pip install setuptools
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
           pip install -r requirements.txt
           pip install pip-licenses
 
