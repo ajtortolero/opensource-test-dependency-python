@@ -53,7 +53,6 @@ jobs:
       #     echo "with open('dependencies-request-licenses.json', 'w') as f:" >> licenseReport.py
       #     echo "    json.dump(licenses, f, indent=2)" >> licenseReport.py      
 
-
       # - name: Run license report script
       #   run: python licenseReport.py
 
