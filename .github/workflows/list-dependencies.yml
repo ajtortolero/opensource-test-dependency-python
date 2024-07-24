@@ -55,12 +55,12 @@ jobs:
         run: |
           cat dependencies-request-licenses.json
           
-      - name: Print Request licenses
-        run: |
-          cat dependencies-pip-licenses.json
+      # - name: Print Request licenses
+      #   run: |
+      #     cat dependencies-pip-licenses.json
 
       - name: Upload dependencies list
         uses: actions/upload-artifact@v2
         with:
           name: dependencies
-          path: dependencies-with-licenses.json
+          path: dependencies-pip-licenses.json
